@@ -1,0 +1,12 @@
+import mods.thecomputerizer.plugin.forge.MTForgePlugin
+
+plugins.apply('mods.thecomputerizer.plugin.forge')
+
+musictriggers {
+    entrypoint = mod_entrypoint
+    setVersions $1
+}
+
+sourceSets {
+    main.output.resourcesDir = rootProject.file('forge\\1.$1\\run_client\\MTResources')
+}
