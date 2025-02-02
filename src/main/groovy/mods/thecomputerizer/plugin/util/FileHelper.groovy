@@ -71,12 +71,21 @@ class FileHelper {
     private static void makeVersionDir(File root, File dir, SettingsConfig config) {
         def name = root.name
         String[] split = name.split '\\.'
-        if(split.length==1) makeDirectory dir, name
+        if(split.length==1) dir = makeDirectory dir, name
         else {
             dir = makeDirectory dir, split.length==2 ? root.parentFile.name : root.parentFile.parentFile.name
             def major = split[1]
             dir = makeDirectory dir, "v$major"
-            makeDirectory dir, "m${split.length==3 ? split[2] : guessMinorVersion(major)}"
+            dir = makeDirectory dir, "m${split.length==3 ? split[2] : guessMinorVersion(major)}"
+        }
+        for(def path : config.default_classes) {
+            def isClass = path.endsWith '.class'
+            def base = isClass ? path.substring(0,path.length()-6) : path
+            def filePath = base.replaceAll('\\.','\\\\')
+            if(isClass) filePath+='.java'
+            def file = new File(dir,filePath)
+            if(isClass) file.parentFile.mkdirs()
+            else file.mkdirs()
         }
     }
 

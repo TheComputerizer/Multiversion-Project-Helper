@@ -35,7 +35,7 @@ class SettingsConfig extends GroovyObjectSupport {
     }
 
     private final Set<String> definedProjects = new HashSet<>()
-    List<String> defaultClasses = []
+    List<String> default_classes = []
     String name
     String group
     String default_preprocessor
