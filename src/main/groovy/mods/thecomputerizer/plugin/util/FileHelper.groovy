@@ -55,6 +55,47 @@ class FileHelper {
         def build = new File(directory,'build.gradle')
         if(withTemplates) makeFile build, templatePopulate(FORGE_BUILD,Templates.getTemplateArgs(directory,config))
         else makeFile build, (file) -> {}
+        makeDirectories directory, config
+    }
+
+    private static void makeDirectories(File root, SettingsConfig config) {
+        File dir = makeDirectory root,'src'
+        makeDirectory dir,'test\\java'
+        makeDirectory dir,'test\\resources'
+        dir = makeDirectory dir, 'main'
+        makeDirectory dir, 'resources\\META-INF'
+        dir = makeDirectory dir, "java\\${config.group.replaceAll('\\.','\\\\')}"
+        makeVersionDir root, dir, config
+    }
+
+    private static void makeVersionDir(File root, File dir, SettingsConfig config) {
+        def name = root.name
+        String[] split = name.split '\\.'
+        if(split.length==1) makeDirectory dir, name
+        else {
+            dir = makeDirectory dir, split.length==2 ? root.parentFile.name : root.parentFile.parentFile.name
+            def major = split[1]
+            dir = makeDirectory dir, "v$major"
+            makeDirectory dir, "m${split.length==3 ? split[2] : guessMinorVersion(major)}"
+        }
+    }
+
+    private static String guessMinorVersion(String major) {
+        switch(major) {
+            case '12': return '2'
+            case '16': return '5'
+            case '18': return '2'
+            case '19': return '4'
+            case '20': return '1'
+            case '21': return '1'
+            default: return '0'
+        }
+    }
+
+    private static File makeDirectory(File parent, String path) {
+        def dir = new File(parent,path)
+        dir.mkdirs()
+        return dir
     }
 
     static void makeFile(File file, Consumer<File> fileSetup) {
