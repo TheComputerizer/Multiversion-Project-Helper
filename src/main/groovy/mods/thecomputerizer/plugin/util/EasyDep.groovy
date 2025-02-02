@@ -14,6 +14,10 @@ class EasyDep extends GroovyObjectSupport {
         return apply.apply(get())
     }
 
+    EasyDep asVersion(String version) {
+        return get(this.pkg, this.name, version)
+    }
+
     String get() {
         return "${this.pkg}:${this.name}:${this.version}"
     }

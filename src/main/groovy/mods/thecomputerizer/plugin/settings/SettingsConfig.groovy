@@ -38,6 +38,8 @@ class SettingsConfig extends GroovyObjectSupport {
     List<String> defaultClasses = []
     String name
     String group
+    String default_preprocessor
+    String default_resource_output
 
     SettingsConfig() {}
 
@@ -49,7 +51,6 @@ class SettingsConfig extends GroovyObjectSupport {
             FileHelper.initProjectFromSettings settings, path
             settings.include path
             settings.project(path).name = name
-            println "finished defining $name"
         }
     }
 
@@ -61,7 +62,6 @@ class SettingsConfig extends GroovyObjectSupport {
         if(isNotDefined name) {
             FileHelper.initProjectFromSettings settings, name
             settings.include name
-            println "finished defining $name"
         }
     }
 

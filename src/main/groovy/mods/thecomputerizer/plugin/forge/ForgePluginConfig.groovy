@@ -17,8 +17,11 @@ class ForgePluginConfig extends PluginCommonConfig {
         super(project)
     }
 
-    @Override
-    void setVersions(int major, int minor) {
+    @Override void onEvaluateFinished(Project project) {
+        project.plugins.getPlugin(ForgePlugin).onEvaluateFinished project
+    }
+
+    @Override void setVersions(int major, int minor) {
         this.versions = VersionHelper.getForgeVersions(major,minor)
     }
 }

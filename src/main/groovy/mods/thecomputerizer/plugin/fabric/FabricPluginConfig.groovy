@@ -15,8 +15,11 @@ class FabricPluginConfig extends PluginCommonConfig {
         super(project)
     }
 
-    @Override
-    void setVersions(int major, int minor) {
+    @Override void onEvaluateFinished(Project project) {
+        project.plugins.getPlugin(FabricPlugin).onEvaluateFinished project
+    }
+
+    @Override void setVersions(int major, int minor) {
         this.versions = VersionHelper.getFabricVersions(major,minor)
     }
 }

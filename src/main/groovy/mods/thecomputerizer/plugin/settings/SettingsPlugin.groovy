@@ -20,7 +20,6 @@ class SettingsPlugin implements Plugin<Settings> {
     }
 
     @Override void apply(Settings settings) {
-        println 'initializing multiversion helper plugin'
         init settings
         settings.pluginManager.apply FoojayToolchainsConventionPlugin
         println 'finished initializing multiversion helper plugin'
