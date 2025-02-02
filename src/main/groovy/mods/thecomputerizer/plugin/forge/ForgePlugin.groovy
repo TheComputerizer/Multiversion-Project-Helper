@@ -2,6 +2,8 @@ package mods.thecomputerizer.plugin.forge
 
 import mods.thecomputerizer.plugin.common.PluginCommon
 import mods.thecomputerizer.plugin.common.PluginCommonConfig
+import mods.thecomputerizer.plugin.common.CommonVersions
+import mods.thecomputerizer.plugin.util.EasyDep
 import net.minecraftforge.gradle.common.util.RunConfig
 import net.minecraftforge.gradle.userdev.UserDevExtension
 import net.minecraftforge.gradle.userdev.UserDevPlugin
@@ -29,6 +31,15 @@ class ForgePlugin extends PluginCommon {
     }
 
     @Override
+    void addMinecraft(Project project, CommonVersions versions) {
+        def dep = EasyDep.get('net.minecraftforge','forge',"${versions.minecraft}-${((ForgeVersions)versions).forge}")
+        project.dependencies {
+            println "adding minecraft ${dep.get()}"
+            minecraft dep.get()
+        }
+    }
+
+    @Override
     void apply(Project project) {
         init project, ForgePluginConfig
         applyPlugins project
@@ -38,6 +49,7 @@ class ForgePlugin extends PluginCommon {
         project.afterEvaluate {
             configurePlugins project
             configureTasks project
+            addMinecraft project, getConfig(project).versions
         }
     }
 

@@ -16,7 +16,7 @@ class SettingsPlugin implements Plugin<Settings> {
     }
 
     static void init(Settings settings) {
-        settings.extensions.create 'musictriggers', SettingsConfig
+        settings.extensions.create 'multiversion', SettingsConfig
     }
 
     @Override void apply(Settings settings) {

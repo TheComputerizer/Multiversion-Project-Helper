@@ -1,5 +1,6 @@
 package mods.thecomputerizer.plugin.common
 
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
@@ -16,6 +17,18 @@ import org.gradle.plugins.ide.idea.model.IdeaModel
 import static org.gradle.api.file.DuplicatesStrategy.EXCLUDE
 
 abstract class PluginCommon implements Plugin<Project> {
+
+    static void addMaven(Project project, String name, String uri, String ... groups) {
+        project.repositories.maven {
+            it.name = name
+            it.url = project.uri uri
+            if(groups.length>0) {
+                content {
+                    for(def group : groups) it.includeGroup group
+                }
+            }
+        }
+    }
 
     static void applyFrom(Project project, String name) {
         project.apply from: rootFile(project,"gradle\\${name}.gradle")
@@ -51,6 +64,10 @@ abstract class PluginCommon implements Plugin<Project> {
         }
     }
 
+    static PluginCommonConfig getConfig(Project project) {
+        return project.extensions.getByType(PluginCommonConfig)
+    }
+
     static String resourceFile(Project project, String path) {
         return project.file("src\\main\\resources\\$path")
     }
@@ -65,7 +82,7 @@ abstract class PluginCommon implements Plugin<Project> {
 
     static <C extends PluginCommonConfig> void init(Project project, Class<C> configType) {
         ExtensionContainer extensions = project.extensions
-        extensions.create 'musictriggers', configType, project
+        extensions.create 'multiversion', configType, project
     }
 
     static void java(ExtensionContainer extensions) {
@@ -78,10 +95,12 @@ abstract class PluginCommon implements Plugin<Project> {
         return project.rootProject.file(path)
     }
 
+    abstract void addMinecraft(Project project, CommonVersions versions);
+
     void applyPlugins(PluginManager manager) {
-        manager.apply JavaPlugin
-        manager.apply JavaBasePlugin
-        manager.apply JavaLibraryPlugin
+        manager.apply 'java'
+        manager.apply 'java-base'
+        manager.apply 'java-library'
         manager.apply IdeaPlugin
     }
 

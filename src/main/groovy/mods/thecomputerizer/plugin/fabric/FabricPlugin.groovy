@@ -1,11 +1,17 @@
 package mods.thecomputerizer.plugin.fabric
 
+import mods.thecomputerizer.plugin.common.CommonVersions
 import mods.thecomputerizer.plugin.common.PluginCommon
 import mods.thecomputerizer.plugin.common.PluginCommonConfig
 import org.gradle.api.Project
 import org.gradle.api.plugins.PluginManager
 
 class FabricPlugin extends PluginCommon {
+
+    @Override
+    void addMinecraft(Project project, CommonVersions versions) {
+
+    }
 
     @Override
     void apply(Project project) {

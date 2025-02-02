@@ -14,7 +14,7 @@ abstract class PluginCommonConfig extends GroovyObjectSupport {
     boolean parchment = true
     boolean runtime = true
     boolean shadow = true
-    PluginCommonVersions versions
+    CommonVersions versions
 
     PluginCommonConfig(@Nonnull final Project project) {}
 

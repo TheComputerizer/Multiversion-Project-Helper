@@ -1,10 +1,9 @@
 import static org.gradle.api.file.DuplicatesStrategy.EXCLUDE
 
 plugins {
-    id 'groovy'
-    id 'idea'
-    id 'java-library'
     id 'groovy-gradle-plugin'
+    id 'java-library'
+    id 'idea'
 }
 
 group = project_package
@@ -79,7 +78,6 @@ dependencies {
     implementation localGroovy()
     implementation gradleApi()
     implementation gradleTestKit()
-    implementation "org.apache.groovy:groovy:$groovy_version"
     implementation "fabric-loom:fabric-loom.gradle.plugin:$loom_version"
     implementation 'io.github.goooler.shadow:shadow-gradle-plugin:8.+'
     implementation 'net.minecraftforge.gradle:net.minecraftforge.gradle.gradle.plugin:6.+'

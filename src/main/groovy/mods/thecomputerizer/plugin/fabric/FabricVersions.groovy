@@ -1,8 +1,8 @@
 package mods.thecomputerizer.plugin.fabric
 
-import mods.thecomputerizer.plugin.common.PluginCommonVersions
+import mods.thecomputerizer.plugin.common.CommonVersions
 
-class FabricVersions extends PluginCommonVersions {
+class FabricVersions extends CommonVersions {
 
     String fabric_api
     String fabric_loader = '0.+'

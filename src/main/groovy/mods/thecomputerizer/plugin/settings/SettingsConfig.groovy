@@ -6,13 +6,9 @@ import org.gradle.api.initialization.Settings
 class SettingsConfig extends GroovyObjectSupport {
 
     private static String buildVersionPath(String parent, String version) {
-        println "building version path for $version with parent $parent"
         def split = version.split '\\.'
-        println "version split is ${Arrays.toString(split)}"
         if(split.length<2) return parent
-        println "didnt return"
         def path = "${split[0]}.${split[1]}"
-        println "path is $path"
         return ":$parent:${(split.length==2 ? path : "$path:${path}.${split[2]}")}"
     }
 
@@ -46,12 +42,10 @@ class SettingsConfig extends GroovyObjectSupport {
     SettingsConfig() {}
 
     private void defineLayered(Settings settings, String path, String name) {
-        println "returned path as $path"
         def layers = path.count ':'
         settings.rootProject.projectDir
         if(layers>1) defineLayered settings, extractParentPath(path), extractParentName(name)
         if(isNotDefined name) {
-            println "attempting to define project $name with path $path"
             FileHelper.initProjectFromSettings settings, path
             settings.include path
             settings.project(path).name = name
@@ -64,9 +58,7 @@ class SettingsConfig extends GroovyObjectSupport {
     }
 
     void defineProject(Settings settings, String name) {
-        println "attempting to define project $name"
         if(isNotDefined name) {
-            println "initializing $name"
             FileHelper.initProjectFromSettings settings, name
             settings.include name
             println "finished defining $name"
@@ -74,7 +66,6 @@ class SettingsConfig extends GroovyObjectSupport {
     }
 
     void defineVersion(Settings settings, String parent, String version) {
-        println "attempting to define version $version with parent $parent"
         version = "1.$version"
         defineLayered settings, buildVersionPath(parent,version), "${parent}_$version"
     }

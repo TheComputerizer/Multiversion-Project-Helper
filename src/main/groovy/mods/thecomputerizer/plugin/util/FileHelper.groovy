@@ -5,6 +5,8 @@ import org.gradle.api.initialization.Settings
 import javax.annotation.Nullable
 import java.util.function.Consumer
 
+import static mods.thecomputerizer.plugin.util.Templates.FORGE_BUILD
+
 class FileHelper {
 
     private static @Nullable Object getArgOrNull(int index, @Nullable Object ... args) {
@@ -31,10 +33,12 @@ class FileHelper {
     }
 
     private static void initProjectPaths(File directory, String path) {
-        println "initializing paths for $path"
-        path = path.startsWith ':' ? path.substring(1) : path
+        if(path.startsWith ':') path = path.substring 1
+        def dir = directory
         for(String name : path.split(':')) {
-            makeProjectFiles directory, name, name.startsWith('1')
+            if(name.isBlank()) continue
+            dir = new File(dir,name)
+            makeProjectFiles dir, name.startsWith('1')
         }
     }
 
@@ -46,20 +50,19 @@ class FileHelper {
         if(Objects.isNull(args)) return line
         for(int i=0;i<args.length;i++) {
             def arg = getArgOrNull i, args
-            if(Objects.nonNull arg) line = line.replaceAll('\\$'+i,String.valueOf(arg))
+            if(Objects.nonNull arg) line = line.replaceAll("[\$]${i+1}",String.valueOf(arg))
         }
         return line
     }
 
-    private static void makeProjectFiles(File directory, String name, boolean withTemplates) {
-        println "making files for $name in directory $directory"
-        def build = new File(directory,"$name\\build.gradle")
-        if(withTemplates) makeFile build, templatePopulate('build_forge',18)
+    private static void makeProjectFiles(File directory, boolean withTemplates) {
+        def build = new File(directory,'build.gradle')
+        if(withTemplates) makeFile build, templatePopulate(FORGE_BUILD,18)
         else makeFile build, (file) -> {}
     }
 
     static void makeFile(File file, Consumer<File> fileSetup) {
-        file.mkdirs()
+        file.parentFile.mkdirs()
         def fileCreated = false
         if(!file.exists()) {
             try {
@@ -72,11 +75,11 @@ class FileHelper {
         if(file.exists() && fileCreated) fileSetup.accept(file)
     }
 
-    static Consumer<File> templatePopulate(String template, Object ... args) {
-        println "populating template $template"
+    static Consumer<File> templatePopulate(List<String> template, Object ... args) {
+        println "populating template"
         return (file) -> {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                getResourceLines("templates\\${template}.txt").forEach {
+                template.forEach {
                     writer.write(injectArgs it, args)
                     writer.newLine()
                 }
