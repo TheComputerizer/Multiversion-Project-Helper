@@ -53,13 +53,13 @@ class MultiversionRef {
 
     static final String FORGE_12_2 = '14.23.5.2860'
     static final String FORGE_16_5 = '36.2.42'
-    static final String FORGE_18_2 = '40.2.21'
-    static final String FORGE_19_2 = '43.4.4'
-    static final String FORGE_19_4 = '45.3.7'
-    static final String FORGE_20_1 = '47.3.11'
-    static final String FORGE_20_4 = '49.1.12'
-    static final String FORGE_20_6 = '50.1.20'
-    static final String FORGE_21_1 = '52.0.19'
+    static final String FORGE_18_2 = '40.3.6'
+    static final String FORGE_19_2 = '43.4.20'
+    static final String FORGE_19_4 = '45.3.24'
+    static final String FORGE_20_1 = '47.3.33'
+    static final String FORGE_20_4 = '49.1.37'
+    static final String FORGE_20_6 = '50.1.48'
+    static final String FORGE_21_1 = '52.0.53'
 
     static final EasyDep FORGE_DEP = EasyDep.get 'net.minecraftforge', 'forge', '1.0'
 
