@@ -17,7 +17,7 @@ multiversion {
     preprocessor = '$4'
     resource_output = '$5'
     setVersions $1
-    shadow_relocations = [ shadow_package: relocate_these.split(',').toList()]
+    shadow_relocations = [ "$shadow_package": relocate_these.split(',').toList()]
     onEvaluateFinished project
 }'''
 
