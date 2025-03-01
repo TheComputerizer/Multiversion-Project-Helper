@@ -7,7 +7,7 @@ import mods.thecomputerizer.plugin.settings.SettingsConfig
  */
 class Templates {
 
-    static final String FORGE_BUILD = '''plugins.apply('mods.thecomputerizer.plugin.forge')
+    static final String FORGE_BUILD = '''plugins.apply 'mods.thecomputerizer.plugin.forge'
 
 multiversion {
     api = [$3]

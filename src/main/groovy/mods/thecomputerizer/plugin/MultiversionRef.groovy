@@ -96,7 +96,7 @@ class MultiversionRef {
     static final String PARCHMENT_20_1 = '2023.09.03'
     static final String PARCHMENT_20_4 = '2024.04.14'
     static final String PARCHMENT_20_6 = '2024.06.16'
-    static final String PARCHMENT_21_1 = '2024.07.28'
+    static final String PARCHMENT_21_1 = '2024.11.17'
 
     static final String FABRIC_MAPPINGS_16_5 = "$MC_16_5:$PARCHMENT_16_5"
     static final String FABRIC_MAPPINGS_18_2 = "$MC_18_2:$PARCHMENT_18_2"
