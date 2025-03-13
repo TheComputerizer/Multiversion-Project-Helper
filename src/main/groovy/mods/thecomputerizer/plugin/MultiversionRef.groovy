@@ -120,12 +120,12 @@ class MultiversionRef {
     static final def PLUGIN_GROUPS = [ 'com.fasterxml', 'com.fasterxml.jackson', 'com.fasterxml.woodstox',
             'com.google.code.findbugs', 'com.google.code.gson', 'com.google.errorprone', 'com.google.guava',
             'com.google.j2objc', 'com.machinezoo.noexception', 'commons-codec', 'commons-io', 'commons-logging',
-            'de.siegmar', 'io.fabric8', 'io.github.goooler.shadow', 'io.netty', 'it.unimi.dsi', 'jakarta.platform',
-            'net.sf.jopt-simple', 'org.apache', 'org.apache.ant', 'org.apache.commons', 'org.apache.httpcomponents',
-            'org.apache.logging', 'org.apache.logging.log4j', 'org.apache.maven', 'org.checkerframework',
-            'org.codehaus.groovy', 'org.codehaus.plexus', 'org.codehaus.woodstox', 'org.eclipse.ee4j',
-            'org.eclipse.jetty', 'org.jdom', 'org.junit', 'org.mockito', 'org.ow2', 'org.ow2.asm', 'org.slf4j',
-            'org.sonatype.oss', 'org.springframework', 'org.tukaani', 'org.vafer'
+            'de.siegmar', 'io.fabric8', 'com.gradleup.shadow', 'io.netty', 'it.unimi.dsi', 'jakarta.platform',
+            'net.sf.jopt-simple', 'org.apache', 'org.apache.ant', 'org.apache.commons', 'org.apache.groovy',
+            'org.apache.httpcomponents', 'org.apache.logging', 'org.apache.logging.log4j', 'org.apache.maven',
+            'org.checkerframework', 'org.codehaus.groovy', 'org.codehaus.plexus', 'org.codehaus.woodstox',
+            'org.eclipse.ee4j', 'org.eclipse.jetty', 'org.jdom', 'org.junit', 'org.mockito', 'org.ow2', 'org.ow2.asm',
+            'org.slf4j', 'org.sonatype.oss', 'org.springframework', 'org.tukaani', 'org.vafer'
     ]
 
     static final SERENE_SEASONS_DEP = EasyDep.curse 'sereneseasons-291874', '1.0'

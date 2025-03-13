@@ -6,5 +6,5 @@ abstract class CommonVersions extends GroovyObjectSupport {
     String minecraft = '1.12.2'
     String lib = '0.4.0'
     String parchment
-    String shadow = '8.+'
+    String shadow = '9.+'
 }

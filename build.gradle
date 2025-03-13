@@ -24,52 +24,43 @@ java {
 repositories {
     gradlePluginPortal() {
         content {
-            [ 'com.fasterxml', 'com.fasterxml.jackson', 'com.fasterxml.woodstox', 'com.google.code.findbugs',
-              'com.google.code.gson', 'com.google.errorprone', 'com.google.guava', 'com.google.j2objc',
-              'com.machinezoo.noexception', 'commons-codec', 'commons-io', 'commons-logging', 'de.siegmar',
-              'dev.gradleplugins', 'io.fabric8', 'io.github.goooler.shadow', 'io.github.goooler.shadow', 'io.netty',
-              'it.unimi.dsi', 'jakarta.platform', 'net.sf.jopt-simple', 'org.apache', 'org.apache.ant',
-              'org.apache.commons', 'org.apache.httpcomponents', 'org.apache.logging', 'org.apache.logging.log4j',
-              'org.apache.maven', 'org.cadixdev', 'org.checkerframework', 'org.codehaus.groovy', 'org.codehaus.plexus',
-              'org.codehaus.woodstox', 'org.eclipse.ee4j', 'org.eclipse.jetty', 'org.gradle.toolchains',
-              'org.gradle.toolchains.foojay-resolver-convention', 'org.jdom', 'org.jetbrains', 'org.jetbrains.kotlin',
-              'org.junit', 'org.mockito', 'org.ow2', 'org.ow2.asm', 'org.slf4j', 'org.sonatype.oss',
-              'org.springframework', 'org.tukaani', 'org.vafer' ].forEach { includeGroup it }
-        }
-    }
-    mavenCentral() {
-        content {
-            [ 'org.apache.groovy' ].forEach { includeGroup it }
+            plugin_portal_content.split(';').each {grp ->
+                includeGroup grp
+            }
         }
     }
     maven {
         name = 'Fabric'
-        url = uri('https://maven.fabricmc.net/')
+        url = uri 'https://maven.fabricmc.net/'
         content {
-            [ 'fabric-loom', 'net.fabricmc', 'net.fabricmc.fabric-api' ].forEach { includeGroup it }
+            fabric_content.split(';').each {grp ->
+                includeGroup grp
+            }
         }
     }
     maven {
         name = 'Forge'
-        url = uri('https://maven.minecraftforge.net/')
+        url = uri 'https://maven.minecraftforge.net/'
         content {
-            [ 'net.minecraftforge', 'net.minecraftforge.gradle',
-              'org.spongepowered' ].forEach{ includeGroup it }
+            forge_content.split(';').each {grp ->
+                includeGroup grp
+            }
         }
     }
     maven {
         name = 'Garden of Fancy'
-        url = uri('https://maven.gofancy.wtf/releases')
+        url = uri 'https://maven.gofancy.wtf/releases'
         content {
             includeGroup 'wtf.gofancy.fancygradle'
         }
     }
     maven {
         name = 'ParchmentMC'
-        url = uri('https://maven.parchmentmc.org')
+        url = uri 'https://maven.parchmentmc.org'
         content {
-            [ 'org.parchmentmc', 'org.parchmentmc.feather',
-              'org.parchmentmc.librarian.forgegradle' ].forEach { includeGroup it }
+            parchment_content.split(';').each {grp ->
+                includeGroup grp
+            }
         }
     }
 }
@@ -78,13 +69,13 @@ dependencies {
     implementation localGroovy()
     implementation gradleApi()
     implementation gradleTestKit()
-    implementation "fabric-loom:fabric-loom.gradle.plugin:$loom_version"
-    implementation 'io.github.goooler.shadow:shadow-gradle-plugin:8.+'
-    implementation 'net.minecraftforge.gradle:net.minecraftforge.gradle.gradle.plugin:6.+'
-    implementation 'org.gradle.toolchains.foojay-resolver-convention:org.gradle.toolchains.foojay-resolver-convention.gradle.plugin:0.+'
-    implementation 'org.parchmentmc.librarian.forgegradle:org.parchmentmc.librarian.forgegradle.gradle.plugin:1.+'
-    implementation 'org.spongepowered:mixingradle:0.+'
-    implementation 'wtf.gofancy.fancygradle:wtf.gofancy.fancygradle.gradle.plugin:1.+'
+    implementation "$loom_plugin:$loom_version"
+    implementation "$shadow_plugin:$shadow_version"
+    implementation "$forgegradle_plugin:$forgegradle_version"
+    implementation "$foojay_plugin:$foojay_version"
+    implementation "$parchment_forge_plugin:$parchment_forge_version"
+    implementation "$mixingradle_plugin:$mixingradle_version"
+    implementation "$fancygradle_plugin:$fancygradle_version"
 }
 
 compileJava {
