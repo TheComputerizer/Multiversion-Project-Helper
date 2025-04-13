@@ -75,7 +75,7 @@ abstract class PluginCommon implements Plugin<Project> {
     }
 
     static void addMavenCurse(Project project) {
-        addMaven project, 'CurseMaven', 'https://www.cursemaven.com', 'curse.maven'
+        addMaven project, 'CurseMaven', 'https://curse.cleanroommc.com', 'curse.maven'
     }
 
     static void addMavenModrinth(Project project) {
