@@ -17,10 +17,6 @@ idea {
     }
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of 23
-}
-
 repositories {
     gradlePluginPortal() {
         content {
@@ -81,6 +77,7 @@ dependencies {
 compileJava {
     options.deprecation = false //We don't need to log all of the deprecated stuff when compiling
     options.encoding = 'UTF-8'
+    options.release = 23
 }
 
 processResources {
